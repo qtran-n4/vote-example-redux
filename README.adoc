@@ -29,9 +29,9 @@ In the implementation without Redux link:https://github.com/qtran-n4/vote-exampl
 
 image:images/redux-votingcomponent.svg[Redux in VoteComponent]
 
-The React component `VotingComponent` is connected to the the Redux store with the help of the npm link:https://react-redux.js.org/[react-redux]. For this purpose, we need to two define two key methods:
+The React component `VotingComponent` is connected to the the Redux store with the help of the npm link:https://react-redux.js.org/[react-redux]. For this purpose, we need to define two key methods:
 
-* `mapStateToProps`: extracts the properties relevant for `VotingComponent` from the application and make them available as `VotingComponent` 's props.
+* `mapStateToProps`: extracts the properties relevant for `VotingComponent` from the application and makes them available as `VotingComponent` 's props.
 
 * `mapDispatchToProps`: specifies the actions to be created and dispatched for user interaction inside `VotingComponent`.
 
