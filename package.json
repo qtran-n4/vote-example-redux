@@ -1,0 +1,41 @@
+{
+	"name": "vote-example-redux",
+	"version": "0.0.1",
+	"scripts": {
+		"start": "webpack-dev-server",
+		"build": "webpack"
+	},
+	"n4js": {
+		"useES6Imports": true,
+		"projectType": "library",
+		"vendorId": "org.eclipse.n4js",
+		"sources": {
+			"source": [
+				"src"
+			]
+		},
+		"output": "src-gen"
+	},
+	"devDependencies": {
+		"@babel/preset-env": "^7.4.2",
+		"@n4jsd/react": "<=16.8.*",
+		"@n4jsd/react-dom": "<=16.8.*",
+		"babel-core": "^6.26.3",
+		"babel-loader": "^8.0.5",
+		"html-webpack-plugin": "^3.2.0",
+		"n4js-runtime-html5": "0.13.5",
+		"react-hot-loader": "^4.8.0",
+		"webpack": "^4.29.6",
+		"webpack-cli": "^3.3.0",
+		"webpack-dev-server": "^3.2.1",
+		"@n4jsd/redux": "<=4.0.*",
+		"@n4jsd/react-redux": "<=6.0.*"
+	},
+	"dependencies": {
+		"n4js-node": "^0.14.0-next.20190320",
+		"react": "^16.8.5",
+		"react-dom": "^16.8.0",
+		"redux": "^4.0.1",
+		"react-redux": "~6.0.0"
+	}
+}

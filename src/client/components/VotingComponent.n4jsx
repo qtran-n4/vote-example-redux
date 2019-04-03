@@ -1,0 +1,107 @@
+import {connect} from "@n4jsd/react-redux";
+import {StoreState} from "client/StoreState";
+import {increaseChoiceCount} from "client/action";
+import ChoiceBar from "client/components/ChoiceBar";
+import {ReduxAction} from "@n4jsd/redux";
+import * as React from 'react';
+
+class ~Choice {
+	public id: string;
+	public title: string;
+	public count: int;
+	
+	public constructor(@Spec spec:~i~this) {}
+}
+
+class ~Vote {
+	public title: string;
+	public description: string;
+	public choices: Array<Choice>;
+	
+	public constructor(@Spec spec:~i~this) {}
+}
+
+export public interface ~VotingComponentProps extends React.ComponentProps {
+	public vote: Vote;
+	public increaseChoiceCount?: {function(string, int): void}
+}
+
+interface ~VotingComponentState {
+	public vote: Vote;
+}
+
+class VotingComponent extends React.Component<VotingComponentProps, VotingComponentState> {
+	
+	public constructor(props: VotingComponentProps) {
+		super(props);
+	}
+
+    @Override
+    public render(): React.Element<?> {
+        const { vote, increaseChoiceCount } = this.props;
+        console.log(`VotingComponent.props = `, this.props);
+        
+        const totalVotes = vote.choices.reduce(
+        	(prev, curr) => prev + curr.count, 0);
+
+        return (
+            <div className="Row VotingRow Spacer">
+                <div className="Head">
+                    <h1 className="Title">{vote.title}
+                        <div className="Badge">{totalVotes + "Votes"}</div>
+                    </h1>
+                </div>
+                <div className="Description Emphasis">
+                 {vote.description}
+                </div>
+                <div>
+                	{vote.choices.map(choice => 
+                		<ChoiceBar 
+                			key={choice.id}
+                			onClickHandler={() => { console.log('onClickHandler is triggered'); increaseChoiceCount(choice.id, choice.count)}}
+                			percent={choice.count * (100 / totalVotes)} 
+                			{...choice} />
+                	)}
+                </div>
+            </div>
+        );
+    }
+
+}
+
+VotingComponent.propTypes = {
+    vote: React.PropTypes.object.isRequired
+}
+
+/**
+ * Map redux state to VotingComponent's props
+ */
+function mapStateToProps(state: StoreState): VotingComponentProps  {
+	console.log('mapStateToProps is called, state = ', state);
+	
+	return { vote: new Vote({
+			title: state.title,
+			description: state.description,
+			choices: state.choices.map(choice => new Choice({ 
+				id : choice.id,
+				title: choice.title,
+				count: choice.count}))
+	})};
+}
+
+/**
+ * Dispatch actions
+ */
+function mapDispatchToProps(dispatch: {function(ReduxAction): any}) {
+	console.log('mapDispatchToProps is called');
+	return {
+		increaseChoiceCount: (choiceId: string, currentCount: int) => {
+			dispatch(increaseChoiceCount(choiceId, currentCount))	
+		}
+	}
+}
+
+/**
+ * Connect React component with Redux store
+ */
+export public const ConnectedVotingComponent = connect(mapStateToProps, mapDispatchToProps)(VotingComponent);

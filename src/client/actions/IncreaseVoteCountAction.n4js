@@ -1,0 +1,15 @@
+import {BaseAction} from "client/actions/BaseAction";
+
+/**
+ * Action: increase choice count
+ */
+export public  class ~IncreaseChoiceCountAction extends BaseAction {
+	/** Choice id */
+	public choiceId: string;
+
+	/** New choie count */
+	public newCount: int;
+
+	public constructor(@Spec spec:~i~this) {
+	}
+}

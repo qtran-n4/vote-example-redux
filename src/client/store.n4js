@@ -1,0 +1,53 @@
+import {combineReducers} from "@n4jsd/redux";
+import {Choice} from "client/StoreState";
+import {StoreState} from "client/StoreState";
+import {IncreaseChoiceCountAction} from "client/actions/IncreaseVoteCountAction";
+import {ReduxAction} from "@n4jsd/redux";
+import {ReduxStore} from "lib/redux";
+import {createStore} from "lib/redux";
+
+/**
+ * Reducer of {@code IncreaseChoiceCountAction}
+ */
+function increaseChoiceCountReducer(storeState: StoreState, action: ReduxAction): StoreState {
+	console.log('increaseChoiceCountReducer() is called')
+	const defaultState: StoreState = new StoreState({
+	    title: 'How is your day?',
+	    description: 'Tell me: how was your day been so far?',
+		choices: [
+	        new Choice({id: 'choice_1', title: 'Good', count: 7}),
+	        new Choice({id: 'choice_2', title: 'Bad', count: 12}),
+	        new Choice({id: 'choice_3', title: 'Not Sure yet', count: 1}),
+    	]
+	}); 
+
+	switch (action.type) {
+		case IncreaseChoiceCountAction.n4type.fqn:
+			const increaseVoteCountAction = action as IncreaseChoiceCountAction;
+			const choiceId = increaseVoteCountAction.choiceId;
+			const newCount = increaseVoteCountAction.newCount;
+			
+			// New store state as a new copy
+			const newStoreState: StoreState =  new StoreState({
+				title: storeState.title,
+				description: storeState.description,
+				choices: storeState.choices.map(c => 
+					// TODO clone c
+					c.id != choiceId? c : new Choice({ id: c.id, title: c.title, count: newCount })
+				)
+			});
+			return newStoreState;
+
+		default:
+			return defaultState;
+	}
+}
+
+// Redux store
+export public const store: ReduxStore<StoreState> = createStore(increaseChoiceCountReducer);
+//export public const store: ReduxStore<StoreState> = createStore(combineReducers({
+//	increaseChoiceCount: increaseChoiceCountReducer
+//}));
+
+
+

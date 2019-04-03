@@ -1,0 +1,16 @@
+import Layout from "client/components/Layout";
+import {ConnectedVotingComponent} from "client/components/VotingComponent";
+import {store} from "client/store";
+import {Provider} from "@n4jsd/react-redux";
+import * as ReactDOM from 'react-dom';
+
+const mountNode = document.getElementById('voteAppMountPoint'); 
+
+ReactDOM.render(
+	<Provider store={store}>
+		<Layout>
+	        <ConnectedVotingComponent/>
+	    </Layout>
+	</Provider>,
+	mountNode
+);
