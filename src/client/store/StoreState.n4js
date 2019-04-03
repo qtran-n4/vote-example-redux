@@ -1,0 +1,35 @@
+/**
+ * Choice state
+ */
+export public class ~ChoiceState {
+	public id: string;
+	public title: string;
+	public count: int;
+
+	public constructor(@Spec spec:~i~this) {}
+}
+
+/**
+ * Vote state
+ */
+export public class ~VoteState {
+	public title: string;
+	public description: string ;
+	public choices: Array<ChoiceState>;
+	
+	public constructor(@Spec spec:~i~this) {}
+}
+
+/**
+ * (Global) Redux store state
+ */
+export public class ~StoreState {
+	// The page title
+	public pageTitle: string;
+
+	// Vote
+	public vote: VoteState;
+
+	
+	public constructor(@Spec spec:~i~this) {}
+}

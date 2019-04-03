@@ -1,0 +1,16 @@
+// Redux store
+import {increaseChoiceCountReducer} from "client/reducers/reducers";
+import {StoreState} from "client/store/StoreState";
+import {ReduxStore} from "lib/redux";
+import {createStore} from "lib/redux";
+
+
+export public const store: ReduxStore<StoreState> = createStore(increaseChoiceCountReducer);
+
+// Use combineReducers in case there are multiple reducers
+//export public const store: ReduxStore<StoreState> = createStore(combineReducers({
+//	increaseChoiceCount: increaseChoiceCountReducer
+//}));
+
+
+

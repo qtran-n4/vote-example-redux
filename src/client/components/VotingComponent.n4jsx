@@ -1,12 +1,12 @@
-import {StoreState} from "client/StoreState";
-import {increaseChoiceCount} from "client/action";
+import {increaseChoiceCount} from "client/actions/actions";
 import ChoiceBar from "client/components/ChoiceBar";
+import {Choice} from "client/components/VotingComponentProps";
+import {Vote} from "client/components/VotingComponentProps";
+import {VotingComponentProps} from "client/components/VotingComponentProps";
+import {StoreState} from "client/store/StoreState";
 import {connect} from "@n4jsd/react-redux";
 import {ReduxAction} from "@n4jsd/redux";
 import * as React from 'react';
-import {VotingComponentProps} from "client/components/VotingComponentProps";
-import {Vote} from "client/components/VotingComponentProps";
-import {Choice} from "client/components/VotingComponentProps";
 
 
 class VotingComponent extends React.Component<VotingComponentProps, Object> {
@@ -59,9 +59,9 @@ function mapStateToProps(state: StoreState): VotingComponentProps  {
 	console.log('mapStateToProps is called, state = ', state);
 	
 	return { vote: new Vote({
-			title: state.title,
-			description: state.description,
-			choices: state.choices.map(choice => new Choice({ 
+			title: state.vote.title,
+			description: state.vote.description,
+			choices: state.vote.choices.map(choice => new Choice({ 
 				id : choice.id,
 				title: choice.title,
 				count: choice.count}))

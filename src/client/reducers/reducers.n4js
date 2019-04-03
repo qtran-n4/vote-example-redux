@@ -1,23 +1,24 @@
-import {Choice} from "client/StoreState";
-import {StoreState} from "client/StoreState";
 import {IncreaseChoiceCountAction} from "client/actions/IncreaseVoteCountAction";
+import {Choice} from "client/components/VotingComponentProps";
+import {StoreState} from "client/store/StoreState";
+import {VoteState} from "client/store/StoreState";
 import {ReduxAction} from "@n4jsd/redux";
-import {ReduxStore} from "lib/redux";
-import {createStore} from "lib/redux";
 
 /**
  * Reducer of {@code IncreaseChoiceCountAction}
  */
-function increaseChoiceCountReducer(storeState: StoreState, action: ReduxAction): StoreState {
+export public function increaseChoiceCountReducer(storeState: StoreState, action: ReduxAction): StoreState {
 	console.log('increaseChoiceCountReducer() is called')
 	const defaultState: StoreState = new StoreState({
+		pageTitle: 'Voting as a Service',
+		vote: new VoteState({
 	    title: 'How is your day?',
 	    description: 'Tell me: how was your day been so far?',
 		choices: [
 	        new Choice({id: 'choice_1', title: 'Good', count: 7}),
 	        new Choice({id: 'choice_2', title: 'Bad', count: 12}),
 	        new Choice({id: 'choice_3', title: 'Not Sure yet', count: 1}),
-    	]
+    	]})
 	}); 
 
 	switch (action.type) {
@@ -28,27 +29,19 @@ function increaseChoiceCountReducer(storeState: StoreState, action: ReduxAction)
 			
 			// New store state as a new copy
 			const newStoreState: StoreState =  new StoreState({
-				title: storeState.title,
-				description: storeState.description,
-				choices: storeState.choices.map(c => 
+				pageTitle: storeState.pageTitle,	
+				vote: new VoteState({
+				title: storeState.vote.title,
+				description: storeState.vote.description,
+				choices: storeState.vote.choices.map(c => 
 					// TODO clone c
 					c.id != choiceId? c : new Choice({ id: c.id, title: c.title, count: newCount })
-				)
+				)})
 			});
 			return newStoreState;
 
 		default:
+			console.log('increaseChoiceCountReducer() is called, defaultState = ', defaultState);
 			return defaultState;
 	}
 }
-
-// Redux store
-export public const store: ReduxStore<StoreState> = createStore(increaseChoiceCountReducer);
-
-// Use combineReducers in case there are multiple reducers
-//export public const store: ReduxStore<StoreState> = createStore(combineReducers({
-//	increaseChoiceCount: increaseChoiceCountReducer
-//}));
-
-
-

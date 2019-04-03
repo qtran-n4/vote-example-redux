@@ -1,15 +1,26 @@
+import {LayoutProps} from "client/components/LayoutProps";
+import {StoreState} from "client/store/StoreState";
+import {connect} from "@n4jsd/react-redux";
 import * as React from 'react';
 
-export default class Layout extends React.Component<React.ComponentProps, Object> {
+
+/**
+ * Layout React component
+ */
+class Layout extends React.Component<LayoutProps, Object> {
+	
+	public constructor(props: LayoutProps) {
+		super(props);
+	}
 
 	@Override
 	public render(): React.Element<?> {
+		const pageTitle: string = this.props.pageTitle;
+		
 		return (
 	        <div className="Background">
 	            <div className="Header">
-	                <div className="Title">
-	                    {"Voting as a Service"}
-	                </div>
+	                <div className="Title">{pageTitle}</div>
 	            </div>
 	
 	            <div className="Main">
@@ -25,3 +36,18 @@ export default class Layout extends React.Component<React.ComponentProps, Object
 //Layout.propTypes = {
 //    children: React.PropTypes.element.isRequired
 //}
+
+/**
+ * Map redux state to Layout component's props
+ */
+function mapStateToProps(state: StoreState): LayoutProps {
+	return {
+		pageTitle: state.pageTitle
+	};
+}
+
+export public const ConnectedLayout = connect(mapStateToProps, null)(Layout); 
+
+
+
+

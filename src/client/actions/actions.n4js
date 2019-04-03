@@ -3,7 +3,7 @@ import {IncreaseChoiceCountAction} from "client/actions/IncreaseVoteCountAction"
 /**
  * Create IncreaseChoiceCountAction
  */
-export function increaseChoiceCount(choiceId: string, currentCount: int): IncreaseChoiceCountAction {
+export public function increaseChoiceCount(choiceId: string, currentCount: int): IncreaseChoiceCountAction {
 	const action = new IncreaseChoiceCountAction({ choiceId: choiceId, newCount: currentCount + 1});
 	console.log('Creating IncreaseChoiceCountAction -> ', action);
 
