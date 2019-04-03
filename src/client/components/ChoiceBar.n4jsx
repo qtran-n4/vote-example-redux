@@ -1,15 +1,18 @@
+
+//interface ChoiceBarProps extends React.ComponentProps {
+//	public title: string;
+//	public percent: int;
+//	public count: int;
+//	public onClickHandler: Function;
+//}
+
+import {ChoiceBarProps} from "client/components/ChoiceBarProps";
 import * as React from 'react';
 
-export public interface ChoiceBarProps {
-	public title: string;
-	public percent: int;
-	public count: int;
-	public onClickHandler: Function;
-}
 
 export default function ChoiceBar(props: ChoiceBarProps): React.Element<?> {
     return <div className="ChoiceBar"
-    			onClick={props.onClickHandler}>
+    			onClick={props.onClick}>
         <div className="Progress" style={{'width':  props.percent + '%'}}>
             <div className="ChoiceBarTitle">{props.title}</div>
         </div>

@@ -1,36 +1,15 @@
-import {connect} from "@n4jsd/react-redux";
 import {StoreState} from "client/StoreState";
 import {increaseChoiceCount} from "client/action";
 import ChoiceBar from "client/components/ChoiceBar";
+import {connect} from "@n4jsd/react-redux";
 import {ReduxAction} from "@n4jsd/redux";
 import * as React from 'react';
+import {VotingComponentProps} from "client/components/VotingComponentProps";
+import {Vote} from "client/components/VotingComponentProps";
+import {Choice} from "client/components/VotingComponentProps";
 
-class ~Choice {
-	public id: string;
-	public title: string;
-	public count: int;
-	
-	public constructor(@Spec spec:~i~this) {}
-}
 
-class ~Vote {
-	public title: string;
-	public description: string;
-	public choices: Array<Choice>;
-	
-	public constructor(@Spec spec:~i~this) {}
-}
-
-export public interface ~VotingComponentProps extends React.ComponentProps {
-	public vote: Vote;
-	public increaseChoiceCount?: {function(string, int): void}
-}
-
-interface ~VotingComponentState {
-	public vote: Vote;
-}
-
-class VotingComponent extends React.Component<VotingComponentProps, VotingComponentState> {
+class VotingComponent extends React.Component<VotingComponentProps, Object> {
 	
 	public constructor(props: VotingComponentProps) {
 		super(props);
@@ -56,9 +35,9 @@ class VotingComponent extends React.Component<VotingComponentProps, VotingCompon
                 </div>
                 <div>
                 	{vote.choices.map(choice => 
-                		<ChoiceBar 
+                		<ChoiceBar
                 			key={choice.id}
-                			onClickHandler={() => { console.log('onClickHandler is triggered'); increaseChoiceCount(choice.id, choice.count)}}
+                			onClick={() => increaseChoiceCount(choice.id, choice.count) }
                 			percent={choice.count * (100 / totalVotes)} 
                 			{...choice} />
                 	)}
@@ -68,10 +47,10 @@ class VotingComponent extends React.Component<VotingComponentProps, VotingCompon
     }
 
 }
-
-VotingComponent.propTypes = {
-    vote: React.PropTypes.object.isRequired
-}
+//
+//VotingComponent.propTypes = {
+//    vote: React.PropTypes.object.isRequired
+//}
 
 /**
  * Map redux state to VotingComponent's props

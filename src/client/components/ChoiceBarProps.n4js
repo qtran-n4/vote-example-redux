@@ -1,0 +1,11 @@
+import * as React from 'react';
+
+/**
+ * ChoiceBar properties
+ */
+export public interface ~ChoiceBarProps extends React.ComponentProps {
+	public title: string;
+	public percent: int;
+	public count: int;
+	public onClick: Function;
+}

@@ -1,0 +1,22 @@
+import * as React from "react";
+
+export public class ~Choice {
+	public id: string;
+	public title: string;
+	public count: int;
+	
+	public constructor(@Spec spec:~i~this) {}
+}
+
+export public class ~Vote {
+	public title: string;
+	public description: string;
+	public choices: Array<Choice>;
+	
+	public constructor(@Spec spec:~i~this) {}
+}
+
+export public interface ~VotingComponentProps extends React.ComponentProps {
+	public vote: Vote;
+	public increaseChoiceCount?: {function(string, int): void}
+}
