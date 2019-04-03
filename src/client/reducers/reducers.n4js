@@ -10,7 +10,7 @@ import {ReduxAction} from "@n4jsd/redux";
 export public function increaseChoiceCountReducer(storeState: StoreState, action: ReduxAction): StoreState {
 	console.log('increaseChoiceCountReducer() is called')
 	const defaultState: StoreState = new StoreState({
-		pageTitle: 'Voting as a Service',
+		pageTitle: 'Voting as a Service (React + Redux)',
 		vote: new VoteState({
 	    title: 'How is your day?',
 	    description: 'Tell me: how was your day been so far?',
