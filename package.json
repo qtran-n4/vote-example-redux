@@ -20,16 +20,17 @@
 		"@babel/preset-env": "^7.4.2",
 		"@n4jsd/react": "<=16.8.*",
 		"@n4jsd/react-dom": "<=16.8.*",
+		"@n4jsd/react-redux": "<=6.0.*",
+		"@n4jsd/redux": "<=4.0.*",
 		"babel-core": "^6.26.3",
 		"babel-loader": "^8.0.5",
+		"clean-webpack-plugin": "^2.0.1",
 		"html-webpack-plugin": "^3.2.0",
 		"n4js-runtime-html5": "0.13.5",
 		"react-hot-loader": "^4.8.0",
 		"webpack": "^4.29.6",
 		"webpack-cli": "^3.3.0",
-		"webpack-dev-server": "^3.2.1",
-		"@n4jsd/redux": "<=4.0.*",
-		"@n4jsd/react-redux": "<=6.0.*"
+		"webpack-dev-server": "^3.2.1"
 	},
 	"dependencies": {
 		"n4js-node": "^0.14.0-next.20190320",

@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-//  const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
@@ -12,6 +12,7 @@ module.exports = {
   output: {
   	// The output concatenated file
     filename: 'vote-app-redux.js',
+    publicPath: 'dist/',
     path: path.resolve(__dirname, 'public/dist')
   },
   devtool: 'inline-source-map', 
@@ -21,10 +22,11 @@ module.exports = {
 	contentBase: path.join(__dirname, 'public'),
 	port: 8080,
 	hot: true,
-	writeToDisk: true
+	inline: true
   },
 
   plugins: [
+  	new CleanWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ],  
 
