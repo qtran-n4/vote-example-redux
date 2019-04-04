@@ -1,11 +1,34 @@
 // Redux store
+import {applyMiddleware} from "@n4jsd/redux";
 import {increaseChoiceCountReducer} from "client/reducers/increaseChoiceCountReducer";
 import {StoreState} from "client/store/StoreState";
+import {ReduxAction} from "@n4jsd/redux";
 import {ReduxStore} from "lib/redux";
 import {createStore} from "lib/redux";
 
+/**
+ * This middleware transforms N4JS objects into plain objects, since
+ * redux actions must be plain objects.
+ *
+ * Keep in mind that nested N4JS objects are not checked, it's just
+ * a convenience middleware to use a spec-ctor/N4JS class for brevity
+ * when defining an action object structure.
+ * 
+ * Source: https://github.numberfour.eu/NumberFour/onlinepresence/blob/master/packages/com.enfore.opr.app/src/n4js/n4/app/store.n4js
+ */
+function n4jsActionsMiddleware(store) {
+    return (next: Function) => (action: ReduxAction) => {
+        let ctor: Object+ = action.constructor;
+        if (ctor.n4type) {
+            action = Object.assign({}, action) as ReduxAction;
+        }
+        return next(action);
+    };
+}
 
-export public const store: ReduxStore<StoreState> = createStore(increaseChoiceCountReducer);
+// Create Redux store and apply middleware
+export public const store: ReduxStore<StoreState> = 
+	createStore(increaseChoiceCountReducer, applyMiddleware(n4jsActionsMiddleware));
 
 // Use combineReducers in case there are multiple reducers
 //export public const store: ReduxStore<StoreState> = createStore(combineReducers({

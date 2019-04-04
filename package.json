@@ -6,7 +6,7 @@
 		"build": "webpack"
 	},
 	"n4js": {
-		"useES6Imports": false,
+		"useES6Imports": true,
 		"projectType": "library",
 		"vendorId": "org.eclipse.n4js",
 		"sources": {
@@ -38,7 +38,8 @@
 		"org.eclipse.n4js.mangelhaft.assert": "^0.13.5"
 	},
 	"dependencies": {
-		"n4js-node": "^0.13.5",
+		"n4js-node": "^0.14.0-next.20190320",
+		"n4js-runtime-es2015": "^0.14.0-next.20190320",
 		"react": "^16.8.5",
 		"react-dom": "^16.8.0",
 		"redux": "^4.0.1",

@@ -1,3 +1,4 @@
+import {IncreaseChoiceCountAction} from "client/actions/IncreaseVoteCountAction";
 import {increaseChoiceCount} from "client/actions/IncreaseVoteCountAction";
 import {Assert} from "org/eclipse/n4js/mangelhaft/assert/Assert";
 
@@ -7,7 +8,18 @@ export public class ActionCreatorsTest {
 		const choiceId = "choice_1";
 		const currentCount = 41;
 		const actualAction = increaseChoiceCount(choiceId, currentCount);
-		Assert.equal(actualAction.choiceId, choiceId);
-		Assert.equal(actualAction.newCount, currentCount + 1);
+
+		const expectedAction = new IncreaseChoiceCountAction({
+			choiceId: choiceId,
+			newCount: currentCount + 1
+		});
+
+		console.log('keys of actual Action -> ', Object.keys(actualAction));
+		console.log('keys of expected Action -> ', Object.keys(expectedAction));
+
+		Assert.deepEqual(expectedAction, actualAction);
+
+//		Assert.equal(actualAction.choiceId, choiceId);
+//		Assert.equal(actualAction.newCount, currentCount + 1);
 	}
 }
