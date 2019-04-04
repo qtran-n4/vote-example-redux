@@ -18,8 +18,5 @@ export public class ActionCreatorsTest {
 		console.log('keys of expected Action -> ', Object.keys(expectedAction));
 
 		Assert.deepEqual(expectedAction, actualAction);
-
-//		Assert.equal(actualAction.choiceId, choiceId);
-//		Assert.equal(actualAction.newCount, currentCount + 1);
 	}
 }

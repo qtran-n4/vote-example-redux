@@ -6,6 +6,7 @@ import {StoreState} from "client/store/StoreState";
 import {VoteState} from "client/store/StoreState";
 import {ReduxAction} from "@n4jsd/redux";
 import {Assert} from "org/eclipse/n4js/mangelhaft/assert/Assert";
+
 export public class ReducersTest {
 	
 	private initialState: StoreState = new StoreState({
