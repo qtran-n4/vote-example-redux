@@ -1,5 +1,5 @@
 // Redux store
-import {increaseChoiceCountReducer} from "client/reducers/reducers";
+import {increaseChoiceCountReducer} from "client/reducers/increaseChoiceCountReducer";
 import {StoreState} from "client/store/StoreState";
 import {ReduxStore} from "lib/redux";
 import {createStore} from "lib/redux";

@@ -13,3 +13,20 @@ export public  class ~IncreaseChoiceCountAction extends BaseAction {
 	public constructor(@Spec spec:~i~this) {
 	}
 }
+
+/**
+ * Create IncreaseChoiceCountAction
+ */
+export public function increaseChoiceCount(choiceId: string, currentCount: int): IncreaseChoiceCountAction {
+	const action = new IncreaseChoiceCountAction({ choiceId: choiceId, newCount: currentCount + 1});
+	console.log('Creating IncreaseChoiceCountAction -> ', action);
+
+	// Action must be plain JS object, how can we handle this elegantly?
+	return {
+		choiceId: choiceId,
+		newCount: currentCount + 1,
+		get type(): string {
+			return IncreaseChoiceCountAction.n4type.fqn;
+		}
+	};
+}

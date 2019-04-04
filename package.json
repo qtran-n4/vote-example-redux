@@ -6,12 +6,15 @@
 		"build": "webpack"
 	},
 	"n4js": {
-		"useES6Imports": true,
+		"useES6Imports": false,
 		"projectType": "library",
 		"vendorId": "org.eclipse.n4js",
 		"sources": {
 			"source": [
 				"src"
+			],
+			"test": [
+				"test"
 			]
 		},
 		"output": "src-gen"
@@ -30,10 +33,12 @@
 		"react-hot-loader": "^4.8.0",
 		"webpack": "^4.29.6",
 		"webpack-cli": "^3.3.0",
-		"webpack-dev-server": "^3.2.1"
+		"webpack-dev-server": "^3.2.1",
+		"org.eclipse.n4js.mangelhaft": "^0.13.5",
+		"org.eclipse.n4js.mangelhaft.assert": "^0.13.5"
 	},
 	"dependencies": {
-		"n4js-node": "^0.14.0-next.20190320",
+		"n4js-node": "^0.13.5",
 		"react": "^16.8.5",
 		"react-dom": "^16.8.0",
 		"redux": "^4.0.1",

@@ -1,0 +1,48 @@
+import {BaseAction} from "client/actions/BaseAction";
+import {increaseChoiceCount} from "client/actions/IncreaseVoteCountAction";
+import {Choice} from "client/components/VotingComponentProps";
+import {increaseChoiceCountReducer} from "client/reducers/increaseChoiceCountReducer";
+import {StoreState} from "client/store/StoreState";
+import {VoteState} from "client/store/StoreState";
+import {ReduxAction} from "@n4jsd/redux";
+import {Assert} from "org/eclipse/n4js/mangelhaft/assert/Assert";
+export public class ReducersTest {
+	
+	private initialState: StoreState = new StoreState({
+			pageTitle: 'Voting as a Service (React + Redux)',
+			vote: new VoteState({
+		    title: 'How is your day?',
+		    description: 'Tell me: how was your day been so far?',
+			choices: [
+		        new Choice({id: 'choice_1', title: 'Good', count: 5}),
+		        new Choice({id: 'choice_2', title: 'Bad', count: 10}),
+		        new Choice({id: 'choice_3', title: 'Not Sure yet', count: 15}),
+		   	]})
+		});
+
+	@Test
+	shouldReturnInitialState() {
+		const actualState: StoreState = increaseChoiceCountReducer(undefined, new BaseAction());
+		Assert.deepEqual(this.initialState, actualState)
+	}
+	
+
+	@Test
+	shouldReturnCorrectUpdatedChoiceCount() {
+		const action: ReduxAction = increaseChoiceCount('choice_3', 15);
+		const actualState: StoreState = increaseChoiceCountReducer(this.initialState, action);
+		
+		const expectedState: StoreState = new StoreState({
+			pageTitle: 'Voting as a Service (React + Redux)',
+			vote: new VoteState({
+		    title: 'How is your day?',
+		    description: 'Tell me: how was your day been so far?',
+			choices: [
+		        new Choice({id: 'choice_1', title: 'Good', count: 5}),
+		        new Choice({id: 'choice_2', title: 'Bad', count: 10}),
+		        new Choice({id: 'choice_3', title: 'Not Sure yet', count: 16}),
+		   	]})
+		});
+		Assert.deepEqual(expectedState, actualState);
+	}
+}

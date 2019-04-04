@@ -1,0 +1,13 @@
+import {increaseChoiceCount} from "client/actions/IncreaseVoteCountAction";
+import {Assert} from "org/eclipse/n4js/mangelhaft/assert/Assert";
+
+export public class ActionCreatorsTest {
+	@Test
+	createActionToIncreaseVoteCountTest() {
+		const choiceId = "choice_1";
+		const currentCount = 41;
+		const actualAction = increaseChoiceCount(choiceId, currentCount);
+		Assert.equal(actualAction.choiceId, choiceId);
+		Assert.equal(actualAction.newCount, currentCount + 1);
+	}
+}

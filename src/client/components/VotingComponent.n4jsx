@@ -1,4 +1,4 @@
-import {increaseChoiceCount} from "client/actions/actions";
+import {increaseChoiceCount} from "client/actions/IncreaseVoteCountAction";
 import ChoiceBar from "client/components/ChoiceBar";
 import {Choice} from "client/components/VotingComponentProps";
 import {Vote} from "client/components/VotingComponentProps";
